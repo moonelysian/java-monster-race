@@ -1,14 +1,26 @@
-public class Controller {
-    private int count;
+import java.util.ArrayList;
 
-    Controller(int count){
-        this.count = count;
+public class Controller {
+    private int numberOfMonster;
+    private int chance;
+
+    Controller(int numberOfMonster, int change){
+        this.numberOfMonster = numberOfMonster;
+        this.chance = change;
     }
 
-    String run(){
+    ArrayList<String> resultOfRace(){
+        ArrayList result = new ArrayList();
+        for (int monsterNumber=0; monsterNumber < numberOfMonster; monsterNumber++){
+            result.add(calculateTotalMovement());
+        }
+        return result;
+    }
+
+    String calculateTotalMovement(){
         String result = "";
         Movement movement = new Movement();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < chance; i++) {
             result += movement.moveMonster();
         }
         return result;
