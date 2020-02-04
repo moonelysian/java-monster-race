@@ -5,12 +5,12 @@ public class Controller {
     private int numberOfMonster;
     private int chance;
 
-    void startGame(){
+    void startGame() {
         inputCondition();
         printResult(resultOfRace());
     }
 
-    void inputCondition(){
+    void inputCondition() {
         final String startLine = "<스릴만점 건전한 몬스터 경주>";
         final String askNumberOfMonster = "몬스터는 모두 몇 마리인가요?";
         final String askNumberOfChance = "시도할 회수는 몇 회 인가요?";
@@ -25,15 +25,15 @@ public class Controller {
         this.chance = Integer.parseInt(input.nextLine());
     }
 
-    ArrayList<String> resultOfRace(){
+    ArrayList<String> resultOfRace() {
         ArrayList result = new ArrayList();
-        for (int i = 0; i < numberOfMonster; i++){
+        for (int i = 0; i < numberOfMonster; i++) {
             result.add(calculateTotalMovement());
         }
         return result;
     }
 
-    String calculateTotalMovement(){
+    String calculateTotalMovement() {
         String result = "";
         Movement movement = new Movement();
         for (int i = 0; i < chance; i++) {
@@ -42,7 +42,7 @@ public class Controller {
         return result;
     }
 
-    void printResult(ArrayList<String> resultOfRace){
+    void printResult(ArrayList<String> resultOfRace) {
         final String endGameMessage = "<실행 결과>";
         System.out.println(endGameMessage);
 

@@ -8,7 +8,7 @@ public class Movement {
         return (randomNumber > standard);
     }
 
-     String moveMonster(){
+     String moveMonster() {
          String move = "--";
          String stop = "";
 
