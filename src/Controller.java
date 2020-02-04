@@ -5,7 +5,7 @@ public class Controller {
     private int numberOfMonster;
     private int chance;
 
-    void startGame() {
+    void run() {
         inputCondition();
         printResult(resultOfRace());
     }
