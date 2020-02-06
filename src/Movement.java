@@ -1,10 +1,9 @@
 public class Movement {
+    int randomMax = 10;
+    int standard = 3;
 
     boolean verifyMovement() {
-        int randomMax = 10;
-        int standard = 3;
         int randomNumber = (int) (Math.random() * randomMax);
-
         return (randomNumber > standard);
     }
 
