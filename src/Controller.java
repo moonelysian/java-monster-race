@@ -11,18 +11,16 @@ public class Controller {
     }
 
     void inputCondition() {
-        final String startLine = "<스릴만점 건전한 몬스터 경주>";
-        final String askNumberOfMonster = "몬스터는 모두 몇 마리인가요?";
-        final String askNumberOfChance = "시도할 회수는 몇 회 인가요?";
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println(startLine);
-        System.out.println(askNumberOfMonster);
+        System.out.println(Message.startLine);
+        System.out.println(Message.askNumberOfMonster);
         this.numberOfMonster = Integer.parseInt(input.nextLine());
 
-        System.out.println(askNumberOfChance);
+        System.out.println(Message.askNumberOfChance);
         this.chance = Integer.parseInt(input.nextLine());
+        input.close();
     }
 
     ArrayList<String> resultOfRace() {
@@ -34,17 +32,16 @@ public class Controller {
     }
 
     String calculateTotalMovement() {
-        String result = "";
+        StringBuffer result = new StringBuffer();
         Movement movement = new Movement();
         for (int i = 0; i < chance; i++) {
-            result += movement.moveMonster();
+            result.append(movement.moveMonster());
         }
-        return result;
+        return result.toString();
     }
 
     void printResult(ArrayList<String> resultOfRace) {
-        final String endGameMessage = "<실행 결과>";
-        System.out.println(endGameMessage);
+        System.out.println(Message.gameStartMessage);
 
         resultOfRace.forEach(resultOfMonster -> System.out.println(resultOfMonster));
     }
