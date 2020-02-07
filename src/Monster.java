@@ -6,6 +6,12 @@ public abstract class Monster implements Comparable<Monster>{
 
     void move(){}
 
+    void getDistance(int chance) {
+        for (int i = 0; i < chance; i++) {
+            move();
+        }
+    }
+
     @Override
     public int compareTo(Monster monster) {
         if (this.distance > monster.distance) {
