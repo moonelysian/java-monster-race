@@ -9,7 +9,7 @@ public class EsperTypeMonster extends Monster {
     void move() {
         Movement move = new Movement(movePoint);
         if (move.verifyMovement()){
-            super.distance += (int)(Math.random()*100) + 1;
+            super.distance += (int)(Math.random()*99) + 1;
         }
     }
 }
