@@ -1,58 +1,65 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Scanner;
 
 public class Controller {
+    private final String[] AVAILABLE_MONSTER_TYPE = {"달리기", "비행", "에스퍼"};
     private int numberOfMonster;
     private int chance;
     private ArrayList<Monster> monsterList = new ArrayList<>();
-    private final String[] MONSTER_TYPE = {"달리기", "비행", "에스퍼"};
 
     void startGame() {
         System.out.println(Message.startLine);
-        inputNumberOfMonster();
-        inputMonsterNameAndType();
-        inputNumberOfChance();
+        inputRaceInformation();
         resultOfRace();
     }
 
-    private void inputNumberOfMonster() {
-        Scanner input = new Scanner(System.in);
+    void inputRaceInformation() {
+        ConsoleInput input = new ConsoleInput();
         System.out.println(Message.askNumberOfMonster);
-        this.numberOfMonster = Integer.parseInt(input.nextLine());
-    }
+        numberOfMonster = input.inputNumberOfMonster();
 
-    private void inputMonsterNameAndType() {
-        Scanner input = new Scanner(System.in);
         System.out.println(Message.askTypeOfMonster);
-        for (int i = 0; i < this.numberOfMonster; i++) {
-            String[] monsterNameAndType = input.nextLine()
-                    .replaceAll(" ", "")
-                    .split(",");
-            if (monsterNameAndType[1].equals("달리기")){
-                monsterList.add(new RunTypeMonster(monsterNameAndType[0]));
-            }
-            else if (monsterNameAndType[1].equals("비행")) {
-                monsterList.add(new FlyTypeMonster(monsterNameAndType[0]));
-            }
-            else {
-                monsterList.add(new EsperTypeMonster(monsterNameAndType[0]));
-            }
+        for (int i = 0; i < numberOfMonster; i++) {
+            setMonsterList(input.inputMonsterNameAndType());
         }
+
+        System.out.println(Message.askNumberOfChance);
+        chance = input.inputNumberOfChance();
     }
 
-    private void inputNumberOfChance() {
-        Scanner input = new Scanner(System.in);
-        System.out.println(Message.askNumberOfChance);
-        this.chance = Integer.parseInt(input.nextLine());
+    private boolean verifyTypeOfMonster(String monsterType) {
+        return Arrays.asList(AVAILABLE_MONSTER_TYPE).contains(monsterType);
+    }
+
+    void setMonsterList(String[] monster){
+        int name = 0;
+        int type = 1;
+
+        if (verifyTypeOfMonster(monster[type])) {
+            if (monster[type].equals("달리기")) {
+                monsterList.add(new RunTypeMonster(monster[name]));
+            } else if (monster[type].equals("비행")) {
+                monsterList.add(new FlyTypeMonster(monster[name]));
+            } else {
+                monsterList.add(new EsperTypeMonster(monster[name]));
+            }
+            return;
+        }
+        System.out.println(Message.monsterTypeErorr);
     }
 
     private void resultOfRace() {
-        for (int i = 0; i < this.chance; i++) {
-            monsterList.forEach(Monster::move);
+        monsterList.forEach(monster -> monster.getDistance(chance));
+        System.out.println(Message.gameStartMessage);
+        for (Monster monster : monsterList) {
+            System.out.println(monster.name + " [" + monster.type + "] : " + convertNumberToString(monster.distance));
         }
-        monsterList.forEach(monster -> System.out.println(monster.name + " " + monster.type + " " + monster.distance));
         Collections.sort(monsterList);
         System.out.println(Message.congratulations + " " + monsterList.get(0).name + " " + Message.winner);
+    }
+    
+    private String convertNumberToString(int distance) {
+        return "-".repeat(Math.max(0, distance));
     }
 }
