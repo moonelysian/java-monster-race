@@ -6,4 +6,5 @@ public class Message {
     static final String gameStartMessage = "<경기 시작>";
     static final String congratulations = "축하합니다!";
     static final String winner = "몬스터 레이스에서 우승했습니다.";
+    static final String monsterTypeErorr = "존재하지않는 몬스터 타입을 입력하셨습니다.";
 }
