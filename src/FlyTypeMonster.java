@@ -1,13 +1,13 @@
 public class FlyTypeMonster extends Monster {
     FlyTypeMonster(String name) {
         super.name = name;
-        super.type = "달리기";
-        super.movePoint = 4;
+        super.type = "비행";
+        super.movePoint = 6;
     }
 
     @Override
     void move() {
-        Movement move = new Movement(movePoint);
+        Movement move = new Movement(super.movePoint);
         if (move.verifyMovement()){
             super.distance += 3;
         }
