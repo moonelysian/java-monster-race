@@ -14,9 +14,9 @@ public abstract class Monster implements Comparable<Monster>{
 
     @Override
     public int compareTo(Monster monster) {
-        if (this.distance > monster.distance) {
+        if (this.distance < monster.distance) {
             return -1;
-        } else if (this.distance < monster.distance) {
+        } else if (this.distance > monster.distance) {
             return 1;
         }
         return 0;
