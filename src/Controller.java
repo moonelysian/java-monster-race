@@ -32,21 +32,25 @@ public class Controller {
         return Arrays.asList(AVAILABLE_MONSTER_TYPE).contains(monsterType);
     }
 
-    void setMonsterList(String[] monster){
+    private void setMonsterList(String[] monster){
         int name = 0;
         int type = 1;
 
         if (verifyTypeOfMonster(monster[type])) {
-            if (monster[type].equals("달리기")) {
-                monsterList.add(new RunTypeMonster(monster[name]));
-            } else if (monster[type].equals("비행")) {
-                monsterList.add(new FlyTypeMonster(monster[name]));
-            } else {
-                monsterList.add(new EsperTypeMonster(monster[name]));
-            }
+            createMonster(monster[name], monster[type]);
             return;
         }
         System.out.println(Message.monsterTypeErorr);
+    }
+
+    private void createMonster(String monsterName, String monsterType) {
+        if (monsterType.equals("달리기")) {
+            monsterList.add(new RunTypeMonster(monsterName));
+        } else if (monsterType.equals("비행")) {
+            monsterList.add(new FlyTypeMonster(monsterName));
+        } else {
+            monsterList.add(new EsperTypeMonster(monsterName));
+        }
     }
 
     private void resultOfRace() {
@@ -55,8 +59,8 @@ public class Controller {
         for (Monster monster : monsterList) {
             System.out.println(monster.name + " [" + monster.type + "] : " + convertNumberToString(monster.distance));
         }
-        Collections.sort(monsterList);
-        System.out.println(Message.congratulations + " " + monsterList.get(0).name + " " + Message.winner);
+        Monster winner = Collections.max(monsterList);
+        System.out.println(Message.congratulations + " " + winner.name + " " + Message.winner);
     }
     
     private String convertNumberToString(int distance) {
