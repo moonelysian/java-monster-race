@@ -1,6 +1,10 @@
-public class RunTypeMonster extends Monster{
+package model;
 
-    RunTypeMonster(String name) {
+import util.Movement;
+
+public class RunTypeMonster extends Monster {
+
+    public RunTypeMonster(String name) {
         super.name = name;
         super.type = "달리기";
         super.movePoint = 4;

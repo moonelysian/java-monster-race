@@ -1,12 +1,14 @@
+package model;
+
 public abstract class Monster implements Comparable<Monster>{
-    String name;
-    String type;
+    public String name;
+    public String type;
     int movePoint;
     int distance = 0;
 
     void move(){}
 
-    void setDistance(int chance) {
+    public void setDistance(int chance) {
         for (int i = 0; i < chance; i++) {
             move();
         }

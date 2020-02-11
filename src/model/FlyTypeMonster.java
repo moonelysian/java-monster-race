@@ -1,5 +1,9 @@
+package model;
+
+import util.Movement;
+
 public class FlyTypeMonster extends Monster {
-    FlyTypeMonster(String name) {
+    public FlyTypeMonster(String name) {
         super.name = name;
         super.type = "비행";
         super.movePoint = 6;

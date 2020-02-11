@@ -1,5 +1,9 @@
+package model;
+
+import util.Movement;
+
 public class EsperTypeMonster extends Monster {
-    EsperTypeMonster(String name) {
+    public EsperTypeMonster(String name) {
         super.name = name;
         super.type = "에스퍼";
         super.movePoint = 6;
