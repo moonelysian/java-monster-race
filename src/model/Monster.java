@@ -6,10 +6,14 @@ public abstract class Monster implements Comparable<Monster>{
 
     void move(){}
 
-    void getDistance(int chance) {
+    void setDistance(int chance) {
         for (int i = 0; i < chance; i++) {
             move();
         }
+    }
+
+    public String distanceToString() {
+        return "-".repeat(distance);
     }
 
     @Override
