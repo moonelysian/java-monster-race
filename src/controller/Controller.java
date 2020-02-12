@@ -38,6 +38,8 @@ public class Controller {
     }
 
     public void race() {
-        monsterList.forEach(monster -> monster.setDistance(chance));
+        for (int i = 0; i < chance; i++) {
+            monsterList.forEach(Monster::move);
+        }
     }
 }
