@@ -2,19 +2,36 @@ package model;
 
 import util.Movement;
 
-public class RunTypeMonster extends Monster {
+public class RunTypeMonster implements Monster {
+    private String name;
+    private final String TYPE = "달리기";
+    private final int MOVE_POINT = 4;
+    private int distance = 0;
 
     public RunTypeMonster(String name) {
-        super.name = name;
-        super.type = "달리기";
-        super.movePoint = 4;
+        this.name = name;
     }
 
     @Override
-    void move() {
-        Movement move = new Movement(movePoint);
+    public void move() {
+        Movement move = new Movement(MOVE_POINT);
         if (move.verifyMovement()){
-            super.distance += 1;
+            distance += 1;
         }
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getDistance() {
+        return distance;
+    }
+
+    @Override
+    public String toString() {
+        return name + "[" + TYPE + "]: " + "-".repeat(distance);
     }
 }

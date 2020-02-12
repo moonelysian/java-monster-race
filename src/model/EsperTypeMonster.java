@@ -2,18 +2,36 @@ package model;
 
 import util.Movement;
 
-public class EsperTypeMonster extends Monster {
+public class EsperTypeMonster implements Monster {
+    private String name;
+    private final String TYPE = "에스퍼";
+    private final int MOVE_POINT = 9;
+    private int distance = 0;
+
     public EsperTypeMonster(String name) {
-        super.name = name;
-        super.type = "에스퍼";
-        super.movePoint = 6;
+        this.name = name;
     }
 
     @Override
-    void move() {
-        Movement move = new Movement(movePoint);
+    public void move() {
+        Movement move = new Movement(MOVE_POINT);
         if (move.verifyMovement()){
-            super.distance += (int)(Math.random()*99) + 1;
+            distance += (int)(Math.random()*98) + 1;;
         }
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getDistance() {
+        return distance;
+    }
+
+    @Override
+    public String toString() {
+        return name + "[" + TYPE + "]: " + "-".repeat(distance);
     }
 }
