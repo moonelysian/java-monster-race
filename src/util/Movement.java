@@ -1,7 +1,7 @@
 package util;
 
 public class Movement {
-    int randomMax = 10;
+    final int RANDOM_MAX = 10;
     int movePoint;
 
     public Movement(int movePoint) {
@@ -9,7 +9,7 @@ public class Movement {
     }
 
     public boolean verifyMovement() {
-        int randomNumber = (int) (Math.random() * randomMax);
+        int randomNumber = (int) (Math.random() * RANDOM_MAX);
         return (randomNumber >= movePoint);
     }
 }
