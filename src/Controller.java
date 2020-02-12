@@ -1,51 +1,69 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Controller {
+    private final String[] AVAILABLE_MONSTER_TYPE = {"달리기", "비행", "에스퍼"};
     private int numberOfMonster;
     private int chance;
+    private ArrayList<Monster> monsterList = new ArrayList<>();
 
     void startGame() {
-        inputCondition();
-        printResult(resultOfRace());
+        System.out.println(Message.startLine);
+        inputRaceInformation();
+        resultOfRace();
     }
 
-    void inputCondition() {
-        final String startLine = "<스릴만점 건전한 몬스터 경주>";
-        final String askNumberOfMonster = "몬스터는 모두 몇 마리인가요?";
-        final String askNumberOfChance = "시도할 회수는 몇 회 인가요?";
+    void inputRaceInformation() {
+        ConsoleInput input = new ConsoleInput();
+        System.out.println(Message.askNumberOfMonster);
+        numberOfMonster = input.inputNumberOfMonster();
 
-        Scanner input = new Scanner(System.in);
-
-        System.out.println(startLine);
-        System.out.println(askNumberOfMonster);
-        this.numberOfMonster = Integer.parseInt(input.nextLine());
-
-        System.out.println(askNumberOfChance);
-        this.chance = Integer.parseInt(input.nextLine());
-    }
-
-    ArrayList<String> resultOfRace() {
-        ArrayList result = new ArrayList();
+        System.out.println(Message.askTypeOfMonster);
         for (int i = 0; i < numberOfMonster; i++) {
-            result.add(calculateTotalMovement());
+            setMonsterList(input.inputMonsterNameAndType());
         }
-        return result;
+
+        System.out.println(Message.askNumberOfChance);
+        chance = input.inputNumberOfChance();
     }
 
-    String calculateTotalMovement() {
-        String result = "";
-        Movement movement = new Movement();
-        for (int i = 0; i < chance; i++) {
-            result += movement.moveMonster();
-        }
-        return result;
+    private boolean verifyTypeOfMonster(String monsterType) {
+        return Arrays.asList(AVAILABLE_MONSTER_TYPE).contains(monsterType);
     }
 
-    void printResult(ArrayList<String> resultOfRace) {
-        final String endGameMessage = "<실행 결과>";
-        System.out.println(endGameMessage);
+    private void setMonsterList(String[] monster){
+        int name = 0;
+        int type = 1;
 
-        resultOfRace.forEach(resultOfMonster -> System.out.println(resultOfMonster));
+        if (verifyTypeOfMonster(monster[type])) {
+            createMonster(monster[name], monster[type]);
+            return;
+        }
+        System.out.println(Message.monsterTypeErorr);
+    }
+
+    private void createMonster(String monsterName, String monsterType) {
+        if (monsterType.equals("달리기")) {
+            monsterList.add(new RunTypeMonster(monsterName));
+        } else if (monsterType.equals("비행")) {
+            monsterList.add(new FlyTypeMonster(monsterName));
+        } else {
+            monsterList.add(new EsperTypeMonster(monsterName));
+        }
+    }
+
+    private void resultOfRace() {
+        monsterList.forEach(monster -> monster.getDistance(chance));
+        System.out.println(Message.gameStartMessage);
+        for (Monster monster : monsterList) {
+            System.out.println(monster.name + " [" + monster.type + "] : " + convertNumberToString(monster.distance));
+        }
+        Monster winner = Collections.max(monsterList);
+        System.out.println(Message.congratulations + " " + winner.name + " " + Message.winner);
+    }
+    
+    private String convertNumberToString(int distance) {
+        return "-".repeat(Math.max(0, distance));
     }
 }

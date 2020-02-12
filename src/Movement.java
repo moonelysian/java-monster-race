@@ -1,17 +1,13 @@
 public class Movement {
+    int randomMax = 10;
+    int movePoint;
 
-    boolean verifyMovement() {
-        int randomMax = 10;
-        int standard = 3;
-        int randomNumber = (int) (Math.random() * randomMax);
-
-        return (randomNumber > standard);
+    public Movement(int movePoint) {
+        this.movePoint = movePoint;
     }
 
-     String moveMonster() {
-         String move = "--";
-         String stop = "";
-
-         return (verifyMovement() ? move : stop);
+    boolean verifyMovement() {
+        int randomNumber = (int) (Math.random() * randomMax);
+        return (randomNumber >= movePoint);
     }
 }
