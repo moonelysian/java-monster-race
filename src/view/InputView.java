@@ -12,10 +12,7 @@ public class InputView {
         System.out.println(Message.askNumberOfMonster);
         inputNumberOfMonster();
 
-        System.out.println(Message.askTypeOfMonster);
-        for (int i = 0; i < Controller.numberOfMonster; i++) {
-            Controller.setMonsterList(inputMonsterNameAndType());
-        }
+        initializeMonster();
 
         System.out.println(Message.askNumberOfChance);
         inputNumberOfChance();
@@ -24,6 +21,13 @@ public class InputView {
     private void inputNumberOfMonster() {
         Scanner input = new Scanner(System.in);
         Controller.numberOfMonster = Optional.of(Integer.parseInt(input.nextLine())).orElse(0);
+    }
+
+    public void initializeMonster() {
+        System.out.println(Message.askTypeOfMonster);
+        for (int i = 0; i < Controller.numberOfMonster; i++) {
+            Controller.setMonsterList(inputMonsterNameAndType());
+        }
     }
 
     private String[] inputMonsterNameAndType() {
