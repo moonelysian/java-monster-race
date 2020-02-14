@@ -31,6 +31,10 @@ public class FlyTypeMonster implements Monster {
 
     @Override
     public String toString() {
-        return name + "[" + TYPE + "]: " + "-".repeat(distance);
+        StringBuilder total = new StringBuilder();
+        for (int i = 0; i < distance; i++) {
+            total.append("-");
+        }
+        return name + "[" + TYPE + "]: " + total.toString();
     }
 }
