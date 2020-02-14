@@ -1,6 +1,8 @@
 package util;
 
 public class Message {
+    private Message(){}
+
     public static String startLine = "<스릴만점 건전한 몬스터 경주>";
     public static String askNumberOfMonster = "몬스터는 모두 몇 마리인가요?";
     public static String askTypeOfMonster = "경주할 몬스터 이름과 종류를 입력하세요 (쉼표(,)를 기준으로 구분).";
