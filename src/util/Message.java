@@ -9,5 +9,4 @@ public class Message {
     public static String askNumberOfChance = "시도할 회수는 몇 회 인가요?";
     public static String raceStartMessage = "<경기 시작>";
     public static String congratulations = "축하합니다! %s이/가 몬스터 레이스에서 우승했습니다.";
-    public static String monsterTypeError = "존재하지않는 몬스터 타입을 입력하셨습니다.";
 }
