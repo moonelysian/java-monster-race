@@ -1,20 +1,35 @@
 package controller;
 
 import model.*;
-import util.Message;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Controller {
-    private final static String[] AVAILABLE_MONSTER_TYPE = {"달리기", "비행", "에스퍼"};
     public static ArrayList<Monster> monsterList = new ArrayList<>();
     public static int numberOfMonster;
     public static int chance;
 
     private Controller() {}
 
-    private static boolean verifyTypeOfMonster(String monsterType) {
-        return Arrays.asList(AVAILABLE_MONSTER_TYPE).contains(monsterType);
+    public static void race() {
+        for (int i = 0; i < chance; i++) {
+            monsterList.forEach(Monster::move);
+        }
+    }
+
+    public static void setMonsterList(String[] monster){
+        if (ErrorController.verifyInputFormat(monster)) {
+            final String NAME = monster[0];
+            final String TYPE = monster[1];
+
+            if (ErrorController.verifyTypeOfMonster(TYPE)) {
+                createMonster(NAME, TYPE);
+                return;
+            }
+            ErrorController.printMonsterTypeErrorAndReInput();
+            return;
+        }
+        ErrorController.printInputFormatErrorAndReInput();
     }
 
     private static void createMonster(String monsterName, String monsterType) {
@@ -24,24 +39,6 @@ public class Controller {
             monsterList.add(new FlyTypeMonster(monsterName));
         } else {
             monsterList.add(new EsperTypeMonster(monsterName));
-        }
-    }
-
-    public static void setMonsterList(String[] monster){
-        final int NAME = 0;
-        final int TYPE = 1;
-
-        if (verifyTypeOfMonster(monster[TYPE])) {
-            createMonster(monster[NAME], monster[TYPE]);
-            return;
-        }
-        System.out.println(Message.monsterTypeError);
-        System.exit(0);
-    }
-
-    public static void race() {
-        for (int i = 0; i < chance; i++) {
-            monsterList.forEach(Monster::move);
         }
     }
 }
