@@ -1,6 +1,8 @@
 package view;
+
 import controller.Controller;
 import util.Message;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -21,7 +23,7 @@ public class InputView {
 
     private void inputNumberOfMonster() {
         Scanner input = new Scanner(System.in);
-        Controller.numberOfMonster = Integer.parseInt(input.nextLine());
+        Controller.numberOfMonster = Optional.of(Integer.parseInt(input.nextLine())).orElse(0);
     }
 
     private String[] inputMonsterNameAndType() {
@@ -33,6 +35,6 @@ public class InputView {
 
     private void inputNumberOfChance() {
         Scanner input = new Scanner(System.in);
-        Controller.chance = Integer.parseInt(input.nextLine());
+        Controller.chance = Optional.of(Integer.parseInt(input.nextLine())).orElse(0);
     }
 }
