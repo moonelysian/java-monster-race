@@ -6,8 +6,7 @@ public class Main {
         InputView input = new InputView();
         input.initializeRace();
 
-        Controller controller = new Controller();
-        controller.race();
+        Controller.race();
 
         OutputView output = new OutputView();
         output.result();

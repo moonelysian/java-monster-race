@@ -11,6 +11,8 @@ public class Controller {
     public static int numberOfMonster;
     public static int chance;
 
+    private Controller() {}
+
     private static boolean verifyTypeOfMonster(String monsterType) {
         return Arrays.asList(AVAILABLE_MONSTER_TYPE).contains(monsterType);
     }
@@ -37,7 +39,7 @@ public class Controller {
         System.exit(0);
     }
 
-    public void race() {
+    public static void race() {
         for (int i = 0; i < chance; i++) {
             monsterList.forEach(Monster::move);
         }
